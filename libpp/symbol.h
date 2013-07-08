@@ -18,6 +18,7 @@
 #include "format_flags.h"
 #include "op_types.h"
 
+#include <config.h>
 #include <bfd.h>
 #include <stdint.h>
 

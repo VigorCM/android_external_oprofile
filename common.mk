@@ -35,7 +35,7 @@ common_target_cflags := $(common_cflags)
 HAVE_LIBBFD := false
 
 ifeq ($(TARGET_ARCH),arm)
-toolchain := prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-linux-androideabi-4.6
+toolchain := prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/linaro-4.8
 common_host_c_includes := $(common_c_includes) $(toolchain)/include
 common_host_cflags := $(common_cflags) -fexceptions -DANDROID_HOST -DHAVE_XCALLOC
 common_host_ldlibs_libiconv :=
@@ -45,8 +45,10 @@ HAVE_LIBBFD := true
 common_host_cflags += -DMISSING_MREMAP
 common_host_ldlibs_libiconv := -liconv
 else
+ifeq ($(findstring linaro,$(TARGET_TOOLS_PREFIX)),)
 ifeq ($(HOST_OS)-$(HOST_ARCH),linux-x86)
 HAVE_LIBBFD := true
+endif
 endif
 endif
 
